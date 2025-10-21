@@ -14,4 +14,27 @@ class chatView {
         //DOM structure
     }
 
+    /**
+     * render all messages
+     * @param {Array} messages- array of message objects
+     */
+    render(messages) {
+        //render all messages
+    }
+
+    /**
+     * create a single message element
+     * @param {Object} message - message object
+     * @returns {HTMLElement} the message element
+     */
+    createMessageElement(message) {
+
+    }
+
+    /**
+     * scroll to bottom
+     */
+    scrollToBottom() {
+
+    }
 }
