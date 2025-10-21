@@ -30,7 +30,7 @@ class chatModel {
      * notify observers that data changed
      * passes current messages to each observer
      */
-    notifyObserver() {
+    notifyObservers() {
         this.observers.forEach(callback => {
             callback(this.messages);
         });
@@ -77,7 +77,7 @@ class chatModel {
      */
     createMessage(text, isUser) {
         const message = {
-            messageID: crypto.randomUUID(), //ME: unique ID generation that is not sequential numbers
+            id: crypto.randomUUID(), //ME: unique ID generation that is not sequential numbers
             text: text,
             isUser: isUser,
             timestamp: Date.now(),
@@ -86,7 +86,7 @@ class chatModel {
 
         this.messages.push(message);
         this._save();
-        this.notifyObserver();
+        this.notifyObservers();
         return message;
     }
 }
