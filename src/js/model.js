@@ -15,6 +15,7 @@ class chatModel {
         this.STORAGE_KEY = "chatMessages";
         this.observers = [];
 
+        this.loadMessages();
     }
 
     /**
@@ -33,5 +34,18 @@ class chatModel {
         this.observers.forEach(callback => {
             callback(this.messages);
         });
+    }
+
+    /**
+     * load messages from local storage
+     */
+    loadMessages() {
+        try {
+            const data = localStorage.getItem(this.STORAGE_KEY);
+            this.messages = data ? JSON.parse(data) : [];
+        } catch (error) {
+            console.error('Error loading messages', error);
+            this.messages = [];
+        }
     }
 }
