@@ -16,7 +16,7 @@ class chatView {
 
     /**
      * render all messages
-     * @param {Array} messages- array of message objects
+     * @param {Array} messages - array of message objects
      */
     render(messages) {
         //render all messages
@@ -35,6 +35,33 @@ class chatView {
      * scroll to bottom
      */
     scrollToBottom() {
+
+    }
+
+    /**
+     * creat timestamp
+     * @param {number} timestamp - unix timestamp (Date.now())
+     * @returns {HTMLElement}
+     */
+    createTimestamp(timestamp) {
+        const time = document.createElement("time")
+        time.className = "message-timestamp";
+        const now = timestamp;
+        time.textContent = now.toLocaleTimeString("en-US",{
+            hour: "numeric",
+            minute: "2-digit",
+        });
+        time.setAttribute("datatime", now.toISOString())
+        return time;
+
+    }
+
+    /**
+     * create action buttons(edit and delete)
+     * @param {string} messageID
+     * @returns {HTMLElement}
+     */
+    createActionButtons(messageID) {
 
     }
 }
