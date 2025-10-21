@@ -96,10 +96,15 @@ class chatModel {
      * @returns {boolean} True if deleted, False if not found
      */
     deleteMessage(id) {
-        delete this.messages[id];
+        const index = this.messages.findIndex(message => message.id === id);
+        if (index === -1) {
+            return false;
+        }
+        this.messages.splice(index, 1);
+
         this._save();
         this.notifyObservers();
-        //TODO: figure out how to return
+        return true;
     }
 
     /**
@@ -109,7 +114,17 @@ class chatModel {
      * @returns {object/null} updated message or null if not found
      */
     updateMessage(id, newText) {
-        this.messages.find(id)
+        const message = this.messages.find(message => message.id === id);
+        if (!message) {
+            return null; //ME: message not found
+        }
+
+        message.text = newText;
+        message.edited = true;
+
+        this._save();
+        this.notifyObservers();
+        return message;
     }
 }
 
