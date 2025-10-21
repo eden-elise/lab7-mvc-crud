@@ -126,5 +126,14 @@ class chatModel {
         this.notifyObservers();
         return message;
     }
+
+    /**
+     * clear all messages
+     */
+    clearMessages() {
+        this.messages = [];
+        this._save();
+        this.notifyObservers();
+    }
 }
 
