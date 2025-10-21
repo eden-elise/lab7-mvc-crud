@@ -48,4 +48,45 @@ class chatModel {
             this.messages = [];
         }
     }
+
+    /**
+     * save messages to local storage
+     * @private
+     */
+    _save() {
+        try {
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.messages));
+        } catch (error) {
+            console.error('Error saving messages', error);
+        }
+    }
+
+    /**
+     * get all messages
+     * @returns {Array} - array of message objects
+     */
+    getAll() {
+        return this.messages;
+    }
+
+    /**
+     * create a new message
+     * @param {string} text - the message text
+     * @param {boolean} isUser - True if user, False if bot
+     * @returns {object} - the created message object
+     */
+    createMessage(text, isUser) {
+        const message = {
+            messageID: crypto.randomUUID(), //ME: unique ID generation that is not sequential numbers
+            text: text,
+            isUser: isUser,
+            timestamp: Date.now(),
+            edited: false
+        };
+
+        this.messages.push(message);
+        this._save();
+        this.notifyObserver();
+        return message;
+    }
 }
