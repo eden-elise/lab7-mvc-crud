@@ -108,7 +108,7 @@ class chatModel {
     }
 
     /**
-     * update a messages text
+     * update a messages text (CR(U)D)
      * @param {string} id - message ID to update
      * @param {string} newText - new message text
      * @returns {object/null} updated message or null if not found
@@ -128,7 +128,7 @@ class chatModel {
     }
 
     /**
-     * clear all messages
+     * clear all messages (CRU(D))
      */
     clearMessages() {
         this.messages = [];
