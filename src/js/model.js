@@ -136,4 +136,4 @@ class chatModel {
         this.notifyObservers();
     }
 }
-
+export default chatModel;
