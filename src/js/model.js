@@ -70,7 +70,7 @@ class chatModel {
     }
 
     /**
-     * create a new message
+     * create a new message ((C)RUD)
      * @param {string} text - the message text
      * @param {boolean} isUser - True if user, False if bot
      * @returns {object} - the created message object
@@ -89,4 +89,27 @@ class chatModel {
         this.notifyObservers();
         return message;
     }
+
+    /**
+     * delete message by id (C(R)UD)
+     * @param {string} id -message id to delete
+     * @returns {boolean} True if deleted, False if not found
+     */
+    deleteMessage(id) {
+        delete this.messages[id];
+        this._save();
+        this.notifyObservers();
+        //TODO: figure out how to return
+    }
+
+    /**
+     * update a messages text
+     * @param {string} id - message ID to update
+     * @param {string} newText - new message text
+     * @returns {object/null} updated message or null if not found
+     */
+    updateMessage(id, newText) {
+        this.messages.find(id)
+    }
 }
+
