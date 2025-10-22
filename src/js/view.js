@@ -66,7 +66,7 @@ class chatView {
      */
     render(messages) {
         this.messagesContainer.innerHTML = "";
-        this.messageCount.innerHTML = "";
+        this.messageCount.textContent = `${messages.length}`;
 
         if (messages.length === 0) {
             this.showEmptyState();
