@@ -4,14 +4,60 @@
  */
 class chatView {
     constructor() {
-        this.messagesContainer = null;
-        this.inputForm = null;
-        this.inputField = null;
-        this.messageCountDisplay = null;
-        this.init()
+        this.messagesContainer = document.getElementById("messages");
+        this.inputForm = document.getElementById("chat-form");
+        this.inputField = document.getElementById("message-input");
+        this.messageCountDisplay = document.getElementById("message-count");
+
+        this.exportButton = document.getElementById("export-button");
+        this.importButton = document.getElementById("import-button");
+        this.clearButton = document.getElementById("clear-button");
+        this.fileInput = document.getElementById("file-input");
+
+        this.setUpEventListeners()
     }
-    init() {
-        //DOM structure
+
+    /**
+     * set up event listeners
+     */
+    setUpEventListeners() {
+        this.inputForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const text = this.inputField.value.trim()
+
+            if (text) {
+                document.dispatchEvent(new CustomEvent("message-send", {
+                    detail: {text}
+                }));
+
+                this.inputField.value = "";
+                this.inputField.focus();
+            }
+        });
+
+        this.clearButton.addEventListener("click", () => {
+            if (confirm("are you sure you want to clear this message?")) {
+                document.dispatchEvent(new CustomEvent("messages-clear"))
+            }
+        });
+
+        this.exportButton.addEventListener("click", () => {
+            document.dispatchEvent(new CustomEvent("messages-export"));
+        });
+
+        this.importButton.addEventListener("click", () => {
+            this.fileInput.click();
+        });
+
+        this.fileInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                document.dispatchEvent(new CustomEvent("messages-import", {
+                    detail: {file}
+                }));
+                this.fileInput.value = ""; //ME: reset
+            }
+        })
     }
 
     /**
@@ -64,4 +110,10 @@ class chatView {
     createActionButtons(messageID) {
 
     }
+
+    /**
+     * create avatar
+     * @param {boolean} isUser
+     * @returns {HTMLElement}
+     */
 }
