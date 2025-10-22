@@ -96,7 +96,40 @@ class chatView {
      * @returns {HTMLElement} the message element
      */
     createMessageElement(message) {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = message.isUser ? "message-user" : "message-bot";
+        messageDiv.setAttribute("data-message-id", message.id);
 
+        const avatar = this.createAvatar(message.isUser);
+
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "message-content";
+
+        const textP = document.createElement('p');
+        textP.className = "message-text";
+        textP.textContent = message.text;
+
+        if (message.edited) {
+            const editedSpan = document.createElement("span");
+            editedSpan.className = "edited-indicator";
+            editedSpan.textContent = " (edited)";
+            textP.appendChild(editedSpan);
+        }
+
+        const timestamp = this.createTimestamp(message.timestamp);
+
+        contentDiv.appendChild(textP);
+        contentDiv.appendChild(timestamp);
+
+        if (message.isUser) {
+            const actions = this.createActionButtons(message.id);
+            contentDiv.appendChild(actions);
+        }
+
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(contentDiv);
+
+        return messageDiv;
     }
 
     /**
@@ -130,7 +163,37 @@ class chatView {
      * @returns {HTMLElement}
      */
     createActionButtons(messageID) {
+        const actionsDiv = document.createElement("div");
+        actionsDiv.className = "message-actions";
 
+        const editButton = document.createElement("button");
+        editButton.className = "edit-button";
+        editButton.textContent = "Edit";
+        editButton.setAttribute("data-message-id", messageID);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-button";
+        deleteButton.textContent = "Delete";
+        deleteButton.setAttribute("data-message-id", messageID);
+
+        editButton.addEventListener('click', () => {
+            document.dispatchEvent(new CustomEvent('message-edit', {
+                detail: { id: messageID}
+            }));
+        });
+
+        deleteButton.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete this message?')) {
+                document.dispatchEvent(new CustomEvent('message-delete', {
+                    detail: { id: messageID }
+                }));
+            }
+        });
+
+        actionsDiv.appendChild(editButton);
+        actionsDiv.appendChild(deleteButton);
+
+        return actionsDiv;
     }
 
     /**
@@ -149,3 +212,5 @@ class chatView {
         return avatarDiv;
     }
 }
+
+export default chatView;
