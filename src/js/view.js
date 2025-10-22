@@ -7,7 +7,7 @@ class chatView {
         this.messagesContainer = document.getElementById("messages");
         this.inputForm = document.getElementById("chat-form");
         this.inputField = document.getElementById("message-input");
-        this.messageCountDisplay = document.getElementById("message-count");
+        this.messageCount = document.getElementById("message-count");
 
         this.exportButton = document.getElementById("export-button");
         this.importButton = document.getElementById("import-button");
@@ -65,7 +65,29 @@ class chatView {
      * @param {Array} messages - array of message objects
      */
     render(messages) {
-        //render all messages
+        this.messagesContainer.innerHTML = "";
+        this.messageCount.innerHTML = "";
+
+        if (messages.length === 0) {
+            this.showEmptyState();
+        } else {
+            messages.forEach((message) => {
+                const messageElement = this.createMessageElement(message);
+                this.messagesContainer.appendChild(messageElement);
+            });
+            this.scrollToBottom();
+        }
+    }
+
+    /**
+     * show empty state
+     */
+    showEmptyState() {
+        this.messagesContainer.innerHTML = `
+        <div class="empty-state">
+            <p> No messages yet! Start a conversation now</p>
+        </div>
+        `;
     }
 
     /**
