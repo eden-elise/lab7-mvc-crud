@@ -103,23 +103,23 @@ class chatView {
      * scroll to bottom
      */
     scrollToBottom() {
-
+        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
     }
 
     /**
-     * creat timestamp
+     * create timestamp
      * @param {number} timestamp - unix timestamp (Date.now())
      * @returns {HTMLElement}
      */
     createTimestamp(timestamp) {
         const time = document.createElement("time")
         time.className = "message-timestamp";
-        const now = timestamp;
+        const now = new Date(timestamp);
         time.textContent = now.toLocaleTimeString("en-US",{
             hour: "numeric",
             minute: "2-digit",
         });
-        time.setAttribute("datatime", now.toISOString())
+        time.setAttribute("datetime", now.toISOString())
         return time;
 
     }
@@ -138,4 +138,14 @@ class chatView {
      * @param {boolean} isUser
      * @returns {HTMLElement}
      */
+    createAvatar(isUser) {
+        const avatarDiv = document.createElement('div');
+        avatarDiv.className = 'message-avatar';
+
+        const avatarIcon = document.createElement('span');
+        avatarIcon.textContent = isUser ? '😊' : '🤖';
+
+        avatarDiv.appendChild(avatarIcon);
+        return avatarDiv;
+    }
 }
