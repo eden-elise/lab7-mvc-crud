@@ -9,10 +9,20 @@
     --text-color: #2C3A2E;
     --border-color: #C4B5A0;
 
+    /* effects */
+    --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    --focus-shadow: 0 0 0 0.2rem rgba(74, 103, 65, 0.25);
 
     /* layout measurements */
     --min-height-body: 100vh;
     --body-padding: 1.25rem;
+
+    /* chat container */
+    --chat-max-width: 25rem;
+    --chat-height: 37.5rem;
+    --chat-width: 90%;
+    --chat-border-radius: .5rem;
+
 }
 
 /* clearing existing styles */
@@ -20,4 +30,27 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--color-cream);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: var(--min-height-body);
+    padding: var(--body-padding);
+}
+
+/* chat container */
+.chat-container {
+    width: var(--chat-width);
+    max-width: var(--chat-max-width);
+    height: var(--chat-height);
+    background-color: var(--color-white);
+    border-radius: var(--chat-border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
