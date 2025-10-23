@@ -126,7 +126,27 @@ class ChatController {
      * @param {File} file - the JSON file to import
      */
     handleImport(file) {
-        // TODO: Implement this
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            try {
+                const messages = JSON.parse(e.target.result);
+
+                if (!Array.isArray(messages)) {
+                    alert('Invalid file format: Expected an array of messages');
+                    return;
+                }
+
+                this.model.messages = messages;
+                this.model._save();
+                this.model.notifyObservers();
+
+                alert(`Successfully imported ${messages.length} messages!`);
+            } catch (error) {
+                alert('Error importing file: ' + error.message);
+            }
+        };
+        reader.readAsText(file);
     }
 }
 
