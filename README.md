@@ -2,7 +2,7 @@
 
 **COMP305 Fall 2025 - Lab 7 Assignment**  
 **Author:** Eden Tripp  
-**Live Demo:** https://app.netlify.com/projects/etcomp305-lab7/overview
+**Live Demo:** https://etcomp305-lab7.netlify.app/
 
 ---
 
@@ -281,5 +281,5 @@ This project was created for educational purposes as part of COMP305 Fall 2025.
 ---
 
 **Repository:** https://github.com/eden-elise/lab7-mvc-crud <br>
-**Live Demo:** https://app.netlify.com/projects/etcomp305-lab7/overview <br>
+**Live Demo:** https://etcomp305-lab7.netlify.app/ <br>
 **Date Completed:** 10/22/2025
