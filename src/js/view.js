@@ -109,6 +109,8 @@ class chatView {
         textP.className = "message-text";
         textP.textContent = message.text;
 
+        const timestamp = this.createTimestamp(message.timestamp);
+
         if (message.edited) {
             const editedSpan = document.createElement("span");
             editedSpan.className = "edited-indicator";
@@ -116,10 +118,8 @@ class chatView {
             textP.appendChild(editedSpan);
         }
 
-        const timestamp = this.createTimestamp(message.timestamp);
-
+        textP.appendChild(timestamp);
         contentDiv.appendChild(textP);
-        contentDiv.appendChild(timestamp);
 
         if (message.isUser) {
             const actions = this.createActionButtons(message.id);
