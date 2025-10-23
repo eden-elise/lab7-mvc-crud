@@ -29,6 +29,7 @@
     --chat-header-font-size: 1.5rem;
     --chat-header-margin-bottom: 0.5rem;
     --chat-controls-gap: 0.5rem;
+    --chat-header-font-weight: 700;
 
     --message-count-font-size: 0.875rem;
 
@@ -94,7 +95,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Times New Roman", sans-serif;
     background-color: var(--color-cream);
     display: flex;
     justify-content: center;
@@ -121,12 +122,15 @@ body {
     background: var(--header-bg);
     padding: 1rem;
     color: var(--header-text);
+    text-align: center;
 }
 
 
 .chat-header h1 {
     font-size: var(--chat-header-font-size);
     margin-bottom: var(--chat-header-margin-bottom);
+    font-weight: var(--chat-header-font-weight);
+    letter-spacing: 0.025em;
 }
 
 .chat-controls {
