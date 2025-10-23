@@ -1,6 +1,6 @@
-import chatModel from './model.js';
-import chatView from './view.js';
-import { getBotResponse } from './eliza.js';
+import chatModel from "./model.js";
+import chatView from "./view.js";
+import { getBotResponse } from "./eliza.js";
 
 
 
@@ -33,34 +33,34 @@ class ChatController {
      * setup event listeners for custom events from view
      */
     setupEventListeners() {
-        document.addEventListener('message-send', (e) => {
+        document.addEventListener("message-send", (e) => {
             this.handleMessageSend(e.detail.text);
         });
 
-        document.addEventListener('message-edit', (e) => {
+        document.addEventListener("message-edit", (e) => {
             this.handleMessageEdit(e.detail.id);
         });
 
-        document.addEventListener('message-delete', (e) => {
+        document.addEventListener("message-delete", (e) => {
             this.handleMessageDelete(e.detail.id);
         });
 
-        document.addEventListener('messages-clear', () => {
+        document.addEventListener("messages-clear", () => {
             this.handleMessagesClear();
         });
 
-        document.addEventListener('messages-export', () => {
+        document.addEventListener("messages-export", () => {
             this.handleExport();
         });
 
-        document.addEventListener('messages-import', (e) => {
+        document.addEventListener("messages-import", (e) => {
             this.handleImport(e.detail.file);
         });
     }
 
     /**
      * handle sending a new message
-     * @param {string} text - User's message text
+     * @param {string} text - User"s message text
      */
     handleMessageSend(text) {
         this.model.createMessage(text, true);
@@ -82,9 +82,9 @@ class ChatController {
 
         if (!message) return;
 
-        const newText = prompt('edit your message...', message.text);
+        const newText = prompt("edit your message...", message.text);
 
-        if (newText && newText.trim() !== '') {
+        if (newText && newText.trim() !== "") {
             this.model.updateMessage(id, newText.trim());
         }
     }
@@ -110,10 +110,10 @@ class ChatController {
     handleExport() {
         const messages = this.model.getAll();
         const dataStr = JSON.stringify(messages, null, 2);
-        const blob = new Blob([dataStr], { type: 'application/json' });
+        const blob = new Blob([dataStr], { type: "application/json" });
         const url = URL.createObjectURL(blob);
 
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = url;
         a.download = `chat-history-${Date.now()}.json`;
         a.click();
@@ -133,7 +133,7 @@ class ChatController {
                 const messages = JSON.parse(e.target.result);
 
                 if (!Array.isArray(messages)) {
-                    alert('Invalid file format: Expected an array of messages');
+                    alert("Invalid file format: Expected an array of messages");
                     return;
                 }
 
@@ -143,7 +143,7 @@ class ChatController {
 
                 alert(`Successfully imported ${messages.length} messages!`);
             } catch (error) {
-                alert('Error importing file: ' + error.message);
+                alert("Error importing file: " + error.message);
             }
         };
         reader.readAsText(file);
