@@ -1,6 +1,8 @@
-import ChatModel from './model.js';
-import ChatView from './view.js';
-import { getBotResponse } from 'eliza.js';
+import chatModel from './model.js';
+import chatView from './view.js';
+import { getBotResponse } from './eliza.js';
+
+
 
 /**
  * chatController - coordinates between Model and View
@@ -8,8 +10,8 @@ import { getBotResponse } from 'eliza.js';
  */
 class ChatController {
     constructor() {
-        this.model = new ChatModel();
-        this.view = new ChatView();
+        this.model = new chatModel();
+        this.view = new chatView();
 
         this.init();
     }
@@ -79,21 +81,31 @@ class ChatController {
      * @param {string} id - Message ID to delete
      */
     handleMessageDelete(id) {
-        // TODO: Implement this
+        this.model.deleteMessage(id);
     }
 
     /**
      * handle clearing all messages
      */
     handleMessagesClear() {
-        // TODO: Implement this
+        this.model.clearMessages()
     }
 
     /**
      * handle exporting chat history to JSON file
      */
     handleExport() {
-        // TODO: Implement this
+        const messages = this.model.getAll();
+        const dataStr = JSON.stringify(messages, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `chat-history-${Date.now()}.json`;
+        a.click();
+
+        URL.revokeObjectURL(url);
     }
 
     /**
