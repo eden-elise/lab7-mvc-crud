@@ -1,0 +1,23 @@
+:root {
+
+    --color-cream: #F5F1E8;
+    --color-sage: #A8B89F;
+    --color-forest: #4A6741;
+    --color-moss: #D4E5C9;
+    --color-bark: #8B7355;
+    --color-white: #FFFFFF;
+    --text-color: #2C3A2E;
+    --border-color: #C4B5A0;
+
+
+    /* layout measurements */
+    --min-height-body: 100vh;
+    --body-padding: 1.25rem;
+}
+
+/* clearing existing styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
