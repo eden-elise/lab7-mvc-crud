@@ -63,8 +63,13 @@ class ChatController {
      * @param {string} text - User's message text
      */
     handleMessageSend(text) {
-        // TODO: Implement this
+        this.model.createMessage(text, true);
 
+        const botResponse = getBotResponse(text);
+
+        setTimeout(() => {
+            this.model.createMessage(botResponse, false);
+        }, 500);
     }
 
     /**
@@ -72,8 +77,16 @@ class ChatController {
      * @param {string} id - Message ID to edit
      */
     handleMessageEdit(id) {
-        // TODO: Implement this
+        const messages = this.model.getAll();
+        const message = messages.find(msg => msg.id === id);
 
+        if (!message) return;
+
+        const newText = prompt('edit your message...', message.text);
+
+        if (newText && newText.trim() !== '') {
+            this.model.updateMessage(id, newText.trim());
+        }
     }
 
     /**
