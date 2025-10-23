@@ -26,7 +26,24 @@
     /* header */
     --header-bg: var(--color-forest);
     --header-text: var(--color-white);
+    --chat-header-font-size: 1.5rem;
+    --chat-header-margin-bottom: 0.5rem;
+    --chat-controls-gap: 0.5rem;
 
+    --message-count-font-size: 0.875rem;
+
+    /* buttons */
+    --btn-primary-bg: var(--color-forest);
+    --btn-secondary-bg: var(--color-bark);
+    --btn-danger-bg: #A0644E;
+    --btn-edit-bg: var(--color-bark);
+    --btn-delete-bg: #A0644E;
+    --btn-radius: .25rem;
+    --btn-font-size: 0.875rem;
+
+    /* Forest green focus */
+    --hover-opacity: 0.8;
+    --line-height: 1.4;
 
 
 }
@@ -70,8 +87,51 @@ body {
 
 
 .chat-header h1 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: var(--chat-header-font-size);
+    margin-bottom: var(--chat-header-margin-bottom);
+}
+
+.chat-controls {
+    display: flex;
+    gap: var(--chat-controls-gap);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.message-count {
+    font-size: var(--message-count-font-size);
+    margin-right: auto;
+}
+
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--btn-radius);
+    cursor: pointer;
+    font-size: var(--btn-font-size);
+    color: var(--color-white);
+}
+
+
+.btn-primary {
+    background: var(--btn-primary-bg);
+}
+
+
+.btn-secondary {
+    background: var(--btn-secondary-bg);
+}
+
+
+.btn-danger {
+    background: var(--btn-danger-bg);
+}
+
+
+.btn:hover {
+    opacity: var(--hover-opacity);
 }
 
 
